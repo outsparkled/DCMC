@@ -4,7 +4,7 @@ A spigot 1.17 plugin that connects Discord and Minecraft chat!
 ## Setup
 To set up the plugin, put it into your plugins folder and start the server.
 Paste your Bot Token & the channel ID of the discord channel you want your MC chat to be sent to
-into config.yml. Then restart the server. Please note that reloading will suffice, an actual
+into config.yml. Then restart the server. Please note that reloading will not suffice, an actual
 restart is required.
 
 ## Usage
