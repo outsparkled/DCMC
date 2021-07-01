@@ -1,0 +1,6 @@
+name: DCMC
+version: ${project.version}
+main: me.outsparkled.dcmc.DCMC
+api-version: 1.17
+authors: [ outsparkled ]
+description: A plugin that connects Discord and Minecraft chat!
