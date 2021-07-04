@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,7 +32,7 @@ public class ChatConnecter extends ListenerAdapter implements Listener {
     public void startBot() throws InvalidTokenException {
 
         try {
-            jda = JDABuilder.createDefault(plugin.getConfig().getString("bot-token"), GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES).addEventListeners(this).setActivity(Activity.playing("Minecraft")).build();
+            jda = JDABuilder.createDefault(plugin.getConfig().getString("bot-token"), GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES).disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOTE).addEventListeners(this).setActivity(Activity.playing("Minecraft")).build();
             jda.awaitReady();
         } catch (LoginException e) {
             throw new InvalidTokenException();
