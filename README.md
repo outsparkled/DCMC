@@ -1,5 +1,5 @@
 # DCMC
-A spigot 1.17 plugin that connects Discord and Minecraft chat!
+A spigot 1.8-1.17 plugin that connects Discord and Minecraft chat!
 
 ## Setup
 To set up the plugin, put it into your plugins folder and start the server.
