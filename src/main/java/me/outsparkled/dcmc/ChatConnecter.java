@@ -62,9 +62,16 @@ public class ChatConnecter extends ListenerAdapter implements Listener {
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         if (event.getAuthor().isBot() || event.isWebhookMessage() || event.getAuthor().isSystem()) return;
         if (event.getChannel().getIdLong() == plugin.getConfig().getLong("chat-channel-id")) {
+
             String message = event.getMessage().getContentRaw();
             User author = event.getAuthor();
-            Bukkit.broadcastMessage("<" + author.getAsTag() + "> " + message);
+
+            if (plugin.getConfig().getBoolean("show-discriminator")) {
+                Bukkit.broadcastMessage("<" + author.getAsTag() + "> " + message);
+            } else {
+                Bukkit.broadcastMessage("<" + author.getName() + "> " + message);
+            }
+
         }
     }
 }
