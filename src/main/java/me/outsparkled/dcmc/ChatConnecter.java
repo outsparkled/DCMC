@@ -18,17 +18,25 @@ import javax.security.auth.login.LoginException;
 import java.util.logging.Logger;
 
 public class ChatConnecter extends ListenerAdapter implements Listener {
-    public DCMC plugin;
     public JDA jda;
     public Logger logger;
+    public long chatChannelID;
+    public boolean disableMassPings;
+    public boolean disableRolePings;
+    public boolean disableMemberPings;
 
-    public ChatConnecter(DCMC dcmc) throws InvalidTokenException {
-        this.plugin = dcmc;
-        logger = plugin.getLogger();
-        startBot();
-        plugin.reloadConfig();
+    public ChatConnecter(JDA jda, Logger logger, long chatChannelID, boolean disableMassPings, boolean disableRolePings, boolean disableMemberPings) throws InvalidTokenException {
+        this.jda = jda;
+        this.logger = logger;
+        this.disableMassPings = disableMassPings;
+        this.disableRolePings = disableRolePings;
+        this.disableMemberPings = disableMemberPings;
+        this.chatChannelID = chatChannelID;
+        
+        // startBot(); MOVE TO MAIN
     }
-
+/**
+MOVE TO MAIN
     public void startBot() throws InvalidTokenException {
 
         try {
@@ -44,33 +52,30 @@ public class ChatConnecter extends ListenerAdapter implements Listener {
             logger.warning(plugin.getConfig().getLong("chat-channel-id") + " is not a valid channel id! Please set a channel the bot can access in config.yml!");
         }
     }
-
+**/
     @EventHandler
     public void chatEvent(AsyncPlayerChatEvent e) {
         String message = e.getMessage();
-        TextChannel textChannel = jda.getTextChannelById(plugin.getConfig().getLong("chat-channel-id"));
+        TextChannel textChannel = jda.getTextChannelById(chatChannelID);
 
         if (textChannel != null) {
             textChannel.sendMessage("**" + e.getPlayer().getName() + "**: " + message).queue();
         } else {
-            Logger logger = plugin.getLogger();
-            logger.warning(plugin.getConfig().getLong("chat-channel-id") + " is not a valid channel id! Please set a channel the bot can access in config.yml!");
+            logger.warning(chatChannelID + " is not a valid channel id! Please set a channel the bot can access in config.yml!");
         }
     }
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
         if (event.getAuthor().isBot() || event.isWebhookMessage() || event.getAuthor().isSystem()) return;
-        if (event.getChannel().getIdLong() == plugin.getConfig().getLong("chat-channel-id")) {
+        if (event.getChannel().getIdLong() == chatChannelID) {
 
             String message = event.getMessage().getContentRaw();
             User author = event.getAuthor();
-
-            if (plugin.getConfig().getBoolean("show-discriminator")) {
-                Bukkit.broadcastMessage("<" + author.getAsTag() + "> " + message);
-            } else {
-                Bukkit.broadcastMessage("<" + author.getName() + "> " + message);
-            }
+            
+            Bukkit.broadcastMessage("<" + author.getAsTag() + "> " + message);
+          
+            
 
         }
     }
