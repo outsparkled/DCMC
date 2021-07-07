@@ -1,3 +1,7 @@
 bot-token: ''
 chat-channel-id: 1234
-show-discriminator: true
+dc-output-format: '**#sender_mc_username#**: #mc_message#'
+mc-output-format: '<#sender_dc_tag#> #dc_message#'
+disable-mass-pings: true
+disable-role-pings: true
+disable-member-pings: true
