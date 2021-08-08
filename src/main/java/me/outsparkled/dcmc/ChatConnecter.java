@@ -64,6 +64,7 @@ public class ChatConnecter extends ListenerAdapter implements Listener {
         if (event.getAuthor().isBot() || event.isWebhookMessage() || event.getAuthor().isSystem()) return;
         System.out.println(event.getMessage().getContentRaw());
         if (event.getChannel().getIdLong() == chatChannelID && !event.getMessage().getContentRaw().equals("")) {
+
             Bukkit.broadcastMessage(getFinalToMCOutput(event));
         }
     }

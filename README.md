@@ -12,6 +12,6 @@ Messages sent in the Minecraft chat will be sent to your channel specified in co
 Messages sent in said channel will be sent into the Minecraft chat.
 
 ## Planned features
-- [ ] Configurable MC chat output
-- [ ] Configurable DC chat output
+- [x] Configurable MC chat output
+- [x] Configurable DC chat output
 - [ ] add support for nicks
